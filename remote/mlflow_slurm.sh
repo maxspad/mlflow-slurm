@@ -1,8 +1,7 @@
 #!/bin/bash
 
 echo "Starting mlflow..."
-#conda activate nlp-qual-um
-jobid=$(sbatch --output="$SCRATCH/mlflow.log" --parsable util/mlflow.sbatch.sh)
+jobid=$(sbatch --output="$PROJDIR/mlflow.log" --parsable remote/mlflow.sbatch.sh)
 
 echo "Jobid is $jobid"
 echo "Waiting for node to be populated..."
@@ -21,5 +20,3 @@ sleep 3
 echo "SSH port forward to node $node on port 5000..."
 ssh -f -N -L 5000:localhost:5000 $node
 echo "Done."
-
-#squeue -j $jobid -o "%N"
